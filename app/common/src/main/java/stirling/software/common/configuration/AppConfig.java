@@ -115,7 +115,7 @@ public class AppConfig {
                 applicationProperties.getUi().getAppNameNavbar() != null
                         ? applicationProperties.getUi().getAppNameNavbar()
                         : applicationProperties.getUi().getAppName();
-        return (defaultNavBar != null) ? defaultNavBar : "Stirling PDF";
+        return (defaultNavBar != null) ? defaultNavBar : "RW2DESIGN";
     }
 
     @Bean(name = "enableAlphaFunctionality")
