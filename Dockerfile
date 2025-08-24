@@ -8,6 +8,7 @@ RUN gradle build --no-daemon
 FROM alpine:3.22.1@sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1
 
 # Copy necessary files
+COPY scripts /scripts
 COPY --from=build /home/gradle/src/app/core/build/libs/*.jar app.jar
 COPY app/core/src/main/resources/static/fonts/*.ttf /usr/share/fonts/opentype/noto/
 
