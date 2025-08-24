@@ -1,10 +1,15 @@
+# Build stage
+FROM gradle:8.14-jdk21 AS build
+WORKDIR /home/gradle/src
+COPY . .
+RUN gradle build --no-daemon
+
 # Main stage
 FROM alpine:3.22.1@sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1
 
 # Copy necessary files
-COPY scripts /scripts
+COPY --from=build /home/gradle/src/app/core/build/libs/*.jar app.jar
 COPY app/core/src/main/resources/static/fonts/*.ttf /usr/share/fonts/opentype/noto/
-COPY app/core/build/libs/*.jar app.jar
 
 ARG VERSION_TAG
 
@@ -76,10 +81,9 @@ RUN echo "@main https://dl-cdn.alpinelinux.org/alpine/edge/main" | tee -a /etc/a
     # Configure URW Base 35 fonts
     ln -s /usr/share/fontconfig/conf.avail/69-urw-*.conf /etc/fonts/conf.d/ && \
     fc-cache -f -v && \
-    chmod +x /scripts/* && \
     # User permissions
     addgroup -S stirlingpdfgroup && adduser -S stirlingpdfuser -G stirlingpdfgroup && \
-    chown -R stirlingpdfuser:stirlingpdfgroup $HOME /scripts /usr/share/fonts/opentype/noto /configs /customFiles /pipeline /tmp/stirling-pdf && \
+    chown -R stirlingpdfuser:stirlingpdfgroup $HOME /usr/share/fonts/opentype/noto /configs /customFiles /pipeline /tmp/stirling-pdf && \
     chown stirlingpdfuser:stirlingpdfgroup /app.jar
 
 EXPOSE 8080/tcp
