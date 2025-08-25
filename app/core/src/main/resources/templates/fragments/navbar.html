@@ -294,46 +294,6 @@
         </div>
         <div class="modal-body">
           <p class="mb-0" th:utext="#{settings.appVersion} + ' ' + ${@appVersion}"></p>
-          <div class="d-flex justify-content-between align-items-center mb-3 mt-3">
-            <div class="footer-center" style="flex-direction: row">
-              <a href="#" class="mx-1" role="button" target="_blank" th:title="#{visitGithub}">
-                <img th:src="@{'/images/github.svg'}" alt="github" />
-              </a>
-              <a
-                href="https://hub.docker.com/r/stirlingtools/stirling-pdf"
-                class="mx-1"
-                role="button"
-                target="_blank"
-                th:title="#{seeDockerHub}"
-              >
-                <img th:src="@{'/images/docker.svg'}" alt="docker" />
-              </a>
-              <a href="https://discord.gg/Cn8pWhQRxZ" class="mx-1" role="button" target="_blank" th:title="#{joinDiscord}">
-                <img th:src="@{'/images/discord.svg'}" alt="discord" />
-              </a>
-            </div>
-
-            <a th:href="@{'/swagger-ui/index.html'}" class="btn btn-sm btn-outline-primary mx-1" role="button" target="_blank"
-              >API</a
-            >
-            <a
-              href="#"
-              class="btn btn-sm btn-outline-primary mx-1"
-              id="update-btn"
-              th:utext="#{settings.update}"
-              role="button"
-              target="_blank"
-            ></a>
-          </div>
-
-          <div class="mb-3">
-            <label for="downloadOption" th:utext="#{settings.downloadOption.title}"></label>
-            <select class="form-control" id="downloadOption">
-              <option value="sameWindow" th:utext="#{settings.downloadOption.1}"></option>
-              <option value="newWindow" th:utext="#{settings.downloadOption.2}"></option>
-              <option value="downloadFile" th:utext="#{settings.downloadOption.3}"></option>
-            </select>
-          </div>
           <div class="mb-3">
             <label for="zipThreshold" th:utext="#{settings.zipThreshold}"></label><br />
             <input type="range" class="form-range" min="1" max="9" step="1" id="zipThreshold" value="4" />
